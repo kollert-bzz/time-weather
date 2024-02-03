@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Texas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card-container">
+        <div class="card1">
+        <div class="weather1">
+            <h1 class="time1">00:00</h1>
+            <img src="img/rain.png" alt="" class="weather-icon1">
+            <h1 class="temp1">14°C</h1>
+            <h2 class="city1">Austin</h2>
+            <div class="details1">
+                <div class="col">
+                    <img src="img/humidity.png" alt="">
+                    <div>
+                        <p class="humidity1">95%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="img/wind.png" alt="">
+                    <div>
+                        <p class="wind1">19 km/h</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="card">
+            <div class="search">
+                <input type="text" placeholder="enter city name" spellcheck="false">
+                <button><img src="img/search.png" alt=""></button>
+            </div>
+            <div class="error">
+                <p>Invalid search</p>
+            </div>
+            <div class="weather">
+                <h1 class="time">00:00</h1>
+                <img src="img/rain.png" alt="" class="weather-icon">
+                <h1 class="temp">14°C</h1>
+                <h2 class="city">Texas</h2>
+                <div class="details">
+                    <div class="col">
+                        <img src="img/humidity.png" alt="humidity">
+                        <div>
+                            <p class="humidity">95%</p>
+                            <p>Humidity</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img src="img/wind.png" alt="wind">
+                        <div>
+                            <p class="wind">19 km/h</p>
+                            <p>Wind Speed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card3">
+        <div class="weather3">
+            <h1 class="time3">00:00</h1>
+            <img src="img/rain.png" alt="" class="weather-icon3">
+            <h1 class="temp3">14°C</h1>
+            <h2 class="city3">Texas</h2>
+            <div class="details3">
+                <div class="col">
+                    <img src="img/humidity.png" alt="">
+                    <div>
+                        <p class="humidity3">95%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="img/wind.png" alt="wind">
+                    <div>
+                        <p class="wind3">19 km/h</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+<script>
+    const apiKey = 'd2bf9413faa5be458883a34dc7be26f0'
+    const apiURL = 'https://api.openweathermap.org/data/2.5/weather?units=metric&q='
+
+    const searchBox = document.querySelector('.search input');
+    const searchBtn = document.querySelector('.search button');
+    const weatherIcon = document.querySelector('.weather-icon');
+    async function checkWeather(city){
+        const response = await fetch(apiURL + city + `&appid=${apiKey}`);
+
+        if(response.status === 404){
+            document.querySelector('.error').style.display = 'block'
+            document.querySelector('.weather').style.display = 'none'
+        }else{
+            let data = await response.json();
+            document.querySelector('.city').innerHTML = data.name;
+            document.querySelector('.temp').innerHTML = Math.round(data.main.temp)  + '°C';
+            document.querySelector('.humidity').innerHTML = data.main.humidity + '%';
+            document.querySelector('.wind').innerHTML = Math.round(data.wind.speed * 3) + ' km/h';
+
+            const timezone = data.timezone
+            const timeDifference =  timezone - 3600;
+            const currentTime = new Date();
+            const offsetTime = new Date(currentTime.getTime() + (timeDifference * 1000));
+
+            const hours = offsetTime.getHours().toString().padStart(2, '0');
+            const minutes = offsetTime.getMinutes().toString().padStart(2, '0');
+            document.querySelector('.time').innerHTML = `${hours}:${minutes}`
+
+            if(data.weather[0].main == 'Clouds'){
+                weatherIcon.src = 'img/clouds.png'
+            }
+            else if(data.weather[0].main == 'Clear'){
+                weatherIcon.src = 'img/clear.png'
+            }
+            else if(data.weather[0].main == 'Rain'){
+                weatherIcon.src = 'img/rain.png'
+            }
+            else if(data.weather[0].main == 'Drizzle'){
+                weatherIcon.src = 'img/drizzle.png'
+            }
+            else if(data.weather[0].main == 'Mist'){
+                weatherIcon.src = 'img/mist.png'
+            }
+            else if(data.weather[0].main == 'Snow'){
+                weatherIcon.src = 'img/snow.png'
+            }
+
+            document.querySelector('.weather').style.display = 'block'
+            document.querySelector('.error').style.display = 'none'
+        }
+        }
+
+    const weatherIcon1 = document.querySelector('.weather-icon1');
+    async function checkWeather1(){
+        const response = await fetch(apiURL + `austin&appid=${apiKey}`);
+
+        if(response.status === 404){
+            console.error('ok')
+        }else{
+            let data = await response.json();
+            document.querySelector('.city1').innerHTML = data.name;
+            document.querySelector('.temp1').innerHTML = Math.round(data.main.temp)  + '°C';
+            document.querySelector('.humidity1').innerHTML = data.main.humidity + '%';
+            document.querySelector('.wind1').innerHTML = Math.round(data.wind.speed * 3) + ' km/h';
+
+            const timezone1 = data.timezone
+            const timeDifference1 =  timezone1 - 3600;
+            const currentTime1 = new Date();
+            const offsetTime1 = new Date(currentTime1.getTime() + (timeDifference1 * 1000));
+
+            const hours = offsetTime1.getHours().toString().padStart(2, '0');
+            const minutes = offsetTime1.getMinutes().toString().padStart(2, '0');
+            document.querySelector('.time1').innerHTML = `${hours}:${minutes}`
+
+            if(data.weather[0].main == 'Clouds'){
+                weatherIcon1.src = 'img/clouds.png'
+            }
+            else if(data.weather[0].main == 'Clear'){
+                weatherIcon1.src = 'img/clear.png'
+            }
+            else if(data.weather[0].main == 'Rain'){
+                weatherIcon1.src = 'img/rain.png'
+            }
+            else if(data.weather[0].main == 'Drizzle'){
+                weatherIcon1.src = 'img/drizzle.png'
+            }
+            else if(data.weather[0].main == 'Mist'){
+                weatherIcon1.src = 'img/mist.png'
+            }
+            else if(data.weather[0].main == 'Snow'){
+                weatherIcon1.src = 'img/snow.png'
+            }
+
+            document.querySelector('.weather1').style.display = 'block'
+        }
+    }
+
+
+    const weatherIcon3 = document.querySelector('.weather-icon3');
+    async function checkWeather3(){
+        const response = await fetch(apiURL + `zurich&appid=${apiKey}`);
+
+        if(response.status === 404){
+            console.error('ok')
+        }else{
+            let data = await response.json();
+            document.querySelector('.city3').innerHTML = data.name;
+            document.querySelector('.temp3').innerHTML = Math.round(data.main.temp)  + '°C';
+            document.querySelector('.humidity3').innerHTML = data.main.humidity + '%';
+            document.querySelector('.wind3').innerHTML = Math.round(data.wind.speed * 3) + ' km/h';
+
+            const timezone3 = data.timezone
+            const timeDifference3 =  timezone3 - 3600;
+            const currentTime3 = new Date();
+            const offsetTime3 = new Date(currentTime3.getTime() + (timeDifference3 * 1000));
+
+            const hours = offsetTime3.getHours().toString().padStart(2, '0');
+            const minutes = offsetTime3.getMinutes().toString().padStart(2, '0');
+            document.querySelector('.time3').innerHTML = `${hours}:${minutes}`
+
+            if(data.weather[0].main == 'Clouds'){
+                weatherIcon3.src = 'img/clouds.png'
+            }
+            else if(data.weather[0].main == 'Clear'){
+                weatherIcon3.src = 'img/clear.png'
+            }
+            else if(data.weather[0].main == 'Rain'){
+                weatherIcon3.src = 'img/rain.png'
+            }
+            else if(data.weather[0].main == 'Drizzle'){
+                weatherIcon3.src = 'img/drizzle.png'
+            }
+            else if(data.weather[0].main == 'Mist'){
+                weatherIcon3.src = 'img/mist.png'
+            }
+            else if(data.weather[0].main == 'Snow'){
+                weatherIcon3.src = 'img/snow.png'
+            }
+
+            document.querySelector('.weather3').style.display = 'block'
+        }
+    }
+
+    checkWeather1()
+    checkWeather3()
+    searchBtn.addEventListener('click', ()=> {
+      checkWeather(searchBox.value)
+    })
+
+
+</script>
+
+
+</body>
+</html>
