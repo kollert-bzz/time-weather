@@ -9,6 +9,10 @@ body{
     background: #222;
 }
 
+.time1, .time3{
+    margin-top: 30px;
+}
+
 .time{
     margin-top: 30px;
 }
@@ -61,7 +65,11 @@ body{
     width: 16px;
 }
 
-.weather-icon, .weather-icon1, .weather-icon3{
+.weather-icon{
+    width: 170px;
+}
+
+.weather-icon1, .weather-icon3{
     width: 170px;
     margin-top: 30px;
 }
@@ -71,13 +79,27 @@ body{
     font-weight: 500;
 }
 
+.weather h3, .weather1 h3{
+    font-size: 50px;
+    font-weight: 200;
+    margin-bottom: 20px;
+}
+
 .weather h2, .weather1 h2, .weather3 h2{
     font-size: 45px;
     font-weight: 400;
     margin-top: -10px;
 }
 
-.details, .details1, .details3{
+.details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 15px;
+}
+
+.details1, .details3{
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -9,9 +9,9 @@
     <div class="card-container">
         <div class="card1">
         <div class="weather1">
-            <h1 class="time1">00:00</h1>
+            <h1 class="time1"></h1>
             <img src="img/rain.png" alt="" class="weather-icon1">
-            <h1 class="temp1">14°C</h1>
+            <h3 class="temp1"></h3>
             <h2 class="city1">Austin</h2>
             <div class="details1">
                 <div class="col">
@@ -40,10 +40,10 @@
                 <p>Invalid search</p>
             </div>
             <div class="weather">
-                <h1 class="time">00:00</h1>
-                <img src="img/rain.png" alt="" class="weather-icon">
-                <h1 class="temp">14°C</h1>
-                <h2 class="city">Texas</h2>
+                <h1 class="time"></h1>
+                <img src="" alt="" class="weather-icon">
+                <h3 class="temp"></h3>
+                <h2 class="city"></h2>
                 <div class="details">
                     <div class="col">
                         <img src="img/humidity.png" alt="humidity">
@@ -92,9 +92,14 @@
     const apiKey = 'd2bf9413faa5be458883a34dc7be26f0'
     const apiURL = 'https://api.openweathermap.org/data/2.5/weather?units=metric&q='
 
+    function celsiusToFahrenheit(celsius) {
+        return Math.round(celsius * 9/5) + 32;
+    }
+
     const searchBox = document.querySelector('.search input');
     const searchBtn = document.querySelector('.search button');
     const weatherIcon = document.querySelector('.weather-icon');
+
     async function checkWeather(city){
         const response = await fetch(apiURL + city + `&appid=${apiKey}`);
 
@@ -104,7 +109,8 @@
         }else{
             let data = await response.json();
             document.querySelector('.city').innerHTML = data.name;
-            document.querySelector('.temp').innerHTML = Math.round(data.main.temp)  + '°C';
+            const celsius = data.main.temp
+            document.querySelector('.temp').innerHTML = Math.round(celsius)  + `°C - ${celsiusToFahrenheit(celsius)}°F`;
             document.querySelector('.humidity').innerHTML = data.main.humidity + '%';
             document.querySelector('.wind').innerHTML = Math.round(data.wind.speed * 3) + ' km/h';
 
@@ -150,7 +156,8 @@
         }else{
             let data = await response.json();
             document.querySelector('.city1').innerHTML = data.name;
-            document.querySelector('.temp1').innerHTML = Math.round(data.main.temp)  + '°C';
+            const celsius = data.main.temp
+            document.querySelector('.temp1').innerHTML = Math.round(celsius)  + `°C - ${celsiusToFahrenheit(celsius)}°F`;
             document.querySelector('.humidity1').innerHTML = data.main.humidity + '%';
             document.querySelector('.wind1').innerHTML = Math.round(data.wind.speed * 3) + ' km/h';
 
@@ -196,7 +203,8 @@
         }else{
             let data = await response.json();
             document.querySelector('.city3').innerHTML = data.name;
-            document.querySelector('.temp3').innerHTML = Math.round(data.main.temp)  + '°C';
+            const celsius = data.main.temp
+            document.querySelector('.temp').innerHTML = Math.round(celsius)  + `°C - ${celsiusToFahrenheit(celsius)}°F`;
             document.querySelector('.humidity3').innerHTML = data.main.humidity + '%';
             document.querySelector('.wind3').innerHTML = Math.round(data.wind.speed * 3) + ' km/h';
 
@@ -227,7 +235,6 @@
             else if(data.weather[0].main == 'Snow'){
                 weatherIcon3.src = 'img/snow.png'
             }
-
             document.querySelector('.weather3').style.display = 'block'
         }
     }
@@ -237,6 +244,14 @@
     searchBtn.addEventListener('click', ()=> {
       checkWeather(searchBox.value)
     })
+
+    searchBox.addEventListener('keyup', (event) => {
+        // Enter is KeyCode 13
+        if (event.keyCode === 13) {
+            checkWeather(searchBox.value);
+        }
+    });
+
 
 
 </script>
