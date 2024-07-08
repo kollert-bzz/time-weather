@@ -11,6 +11,6 @@ function displayTime(timeDifference) {
     console.log(formattedTime)
 }
 
-// Example: Time difference of -21600 seconds (which is -6 hours)
+
 const timeDifference = 3600 - 3600;
 displayTime(timeDifference)

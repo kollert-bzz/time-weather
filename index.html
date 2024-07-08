@@ -6,13 +6,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card-container">
-        <div class="card1">
+<div class="card-container">
+    <div class="card1">
         <div class="weather1">
             <h1 class="time1"></h1>
             <img src="img/rain.png" alt="" class="weather-icon1">
             <h3 class="temp1"></h3>
-            <h2 class="city1">Austin</h2>
+            <h2 class="city1">Brighton</h2>
             <div class="details1">
                 <div class="col">
                     <img src="img/humidity.png" alt="">
@@ -31,43 +31,43 @@
             </div>
         </div>
     </div>
-        <div class="card">
-            <div class="search">
-                <input type="text" placeholder="enter city name" spellcheck="false">
-                <button><img src="img/search.png" alt=""></button>
-            </div>
-            <div class="error">
-                <p>Invalid search</p>
-            </div>
-            <div class="weather">
-                <h1 class="time"></h1>
-                <img src="" alt="" class="weather-icon">
-                <h3 class="temp"></h3>
-                <h2 class="city"></h2>
-                <div class="details">
-                    <div class="col">
-                        <img src="img/humidity.png" alt="humidity">
-                        <div>
-                            <p class="humidity">95%</p>
-                            <p>Humidity</p>
-                        </div>
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="enter city name" spellcheck="false">
+            <button><img src="img/search.png" alt=""></button>
+        </div>
+        <div class="error">
+            <p>Invalid search</p>
+        </div>
+        <div class="weather">
+            <h1 class="time"></h1>
+            <img src="" alt="" class="weather-icon">
+            <h3 class="temp"></h3>
+            <h2 class="city"></h2>
+            <div class="details">
+                <div class="col">
+                    <img src="img/humidity.png" alt="humidity">
+                    <div>
+                        <p class="humidity">95%</p>
+                        <p>Humidity</p>
                     </div>
-                    <div class="col">
-                        <img src="img/wind.png" alt="wind">
-                        <div>
-                            <p class="wind">19 km/h</p>
-                            <p>Wind Speed</p>
-                        </div>
+                </div>
+                <div class="col">
+                    <img src="img/wind.png" alt="wind">
+                    <div>
+                        <p class="wind">19 km/h</p>
+                        <p>Wind Speed</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card3">
+    </div>
+    <div class="card3">
         <div class="weather3">
-            <h1 class="time3">00:00</h1>
+            <h1 class="time3"></h1>
             <img src="img/rain.png" alt="" class="weather-icon3">
-            <h1 class="temp3">14°C</h1>
-            <h2 class="city3">Texas</h2>
+            <h3 class="temp3"></h3>
+            <h2 class="city3"></h2>
             <div class="details3">
                 <div class="col">
                     <img src="img/humidity.png" alt="">
@@ -86,7 +86,7 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 
 <script>
     const apiKey = 'd2bf9413faa5be458883a34dc7be26f0'
@@ -145,11 +145,11 @@
             document.querySelector('.weather').style.display = 'block'
             document.querySelector('.error').style.display = 'none'
         }
-        }
+    }
 
     const weatherIcon1 = document.querySelector('.weather-icon1');
     async function checkWeather1(){
-        const response = await fetch(apiURL + `austin&appid=${apiKey}`);
+        const response = await fetch(apiURL + `brighton&appid=${apiKey}`);
 
         if(response.status === 404){
             console.error('ok')
@@ -196,7 +196,7 @@
 
     const weatherIcon3 = document.querySelector('.weather-icon3');
     async function checkWeather3(){
-        const response = await fetch(apiURL + `zurich&appid=${apiKey}`);
+        const response = await fetch(apiURL + `zürich&appid=${apiKey}`);
 
         if(response.status === 404){
             console.error('ok')
@@ -204,7 +204,7 @@
             let data = await response.json();
             document.querySelector('.city3').innerHTML = data.name;
             const celsius = data.main.temp
-            document.querySelector('.temp').innerHTML = Math.round(celsius)  + `°C - ${celsiusToFahrenheit(celsius)}°F`;
+            document.querySelector('.temp3').innerHTML = Math.round(celsius)  + `°C - ${celsiusToFahrenheit(celsius)}°F`;
             document.querySelector('.humidity3').innerHTML = data.main.humidity + '%';
             document.querySelector('.wind3').innerHTML = Math.round(data.wind.speed * 3) + ' km/h';
 
@@ -242,7 +242,7 @@
     checkWeather1()
     checkWeather3()
     searchBtn.addEventListener('click', ()=> {
-      checkWeather(searchBox.value)
+        checkWeather(searchBox.value)
     })
 
     searchBox.addEventListener('keyup', (event) => {
