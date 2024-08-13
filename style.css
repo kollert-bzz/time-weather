@@ -7,6 +7,11 @@
 
 body{
     background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .time1, .time3{
@@ -138,5 +143,7 @@ body{
 
 .card-container{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    width: 1500px;
+    padding: 0 20px;
 }
