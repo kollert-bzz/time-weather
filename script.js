@@ -79,9 +79,10 @@ const searchBox = document.querySelector('.search input');
 const searchBtn = document.querySelector('.search button');
 
 searchBtn.addEventListener('click', () => {
-    checkWeather(searchBox.value);
-    startWeatherUpdates(searchBox.value);
+    checkWeather(searchBox.value, '2');
+    startWeatherUpdates(searchBox.value, '2');
 });
+
 
 searchBox.addEventListener('keyup', (event) => {
     if (event.keyCode === 13) {
